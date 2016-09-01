@@ -1,0 +1,33 @@
+{
+  "name": "cloudchase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudchase/cloudchase.git"
+  },
+  "author": "Lee Chase",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cloudchase/cloudchase/issues"
+  },
+  "homepage": "https://github.com/cloudchase/cloudchase",
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "browser-sync": "^2.14.3",
+    "del": "^2.2.2",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.1.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sass-lint": "^1.2.0",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-spy": "^1.1.0",
+    "path": "^0.12.7",
+    "run-sequence": "^1.2.2"
+  },
+  "description": ""
+}
