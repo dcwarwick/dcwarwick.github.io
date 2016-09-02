@@ -1,14 +1,135 @@
 @charset 'utf-8';
 
+@import '../utils';
+@import '../settings';
+@import '../mixins';
+
+$bubbleTextBackgroud: #fff;
+
 .blocks-structural__container {
   position: relative;
 
-  &::after {
-    box-shadow: inset 0 30px 0 0 rgba(240, 240, 0, .5);
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
+  &:active, &:hover {
+    * {
+      animation: 0;
+      opacity: 1;
+    }
+  }
+}
+
+.blocks-structural__navigation,
+.blocks-structural__notification,
+.blocks-structural__main,
+.blocks-structural__side-panel,
+.blocks-structural__footer {
+  position: absolute;
+  opacity: 0;
+  line-height: 1; // keep text in overlays centered
+  border: 0;
+
+  &:focus, &:hover, &:active {
+    opacity: 1;
+  }
+
+  .blocks-structural__text {
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: $bubbleTextBackgroud;
+    font-size: $base-font-size;
+    // vertical-align: middle;
+    display: inline-block;
+
+    @include media-query($on-palm) {
+      font-size: 14px;
+    }
+    @include media-query($on-phone) {
+      font-size: 12px;
+    }
+  }
+}
+
+$blocks-structural-animation-stops: 0 16.7 33.4 50 66.7 83.4 100;
+$blocks-structural-animation-map: (
+  navigation: 1 2 3,
+  notification: 2 3 4,
+  main: 3 4 5,
+  side-panel: 4 5 6,
+  footer: 5 6 7
+);
+
+@each $item, $steps in $blocks-structural-animation-map {
+  @keyframes kf-blocks-structural-#{$item} {
+    $start: nth($blocks-structural-animation-stops, nth($steps, 1));
+    $mid: nth($blocks-structural-animation-stops, nth($steps, 2));
+    $end: nth($blocks-structural-animation-stops, nth($steps, 3));
+    @if $start != 0 {
+      0% { opacity: 0; }
+      #{$start}% { opacity: 0; }
+    } @else {
+      #{$start}% { opacity: 0; }
+    }
+    #{$mid}% { opacity: 1; }
+
+    @if $end != 100 {
+      #{$end}% { opacity: 0; }
+      100% { opacity: 0; }
+    } @else {
+      #{$end}% { opacity: 0; }
+    }
+  }
+}
+
+$blocks-structural-animation-time: 10s;
+
+.blocks-structural__navigation {
+  top: 0;
+  left: 0;
+  height: 5%;
+  width: 100%;
+  background-color: rgba(255, 0, 0, .5);
+  animation: kf-blocks-structural-navigation $blocks-structural-animation-time infinite;
+}
+
+.blocks-structural__notification {
+  top: 5%;
+  left: 0;
+  height: 27.5%;
+  width: 100%;
+  background-color: rgba(255, 255, 0, .5);
+  animation: kf-blocks-structural-notification $blocks-structural-animation-time infinite;
+}
+
+.blocks-structural__main {
+  top: 32.5%;
+  left: 0;
+  height: 58.3%;
+  width: 65%;
+  background-color: rgba(0, 255, 0, .5);
+  animation: kf-blocks-structural-main $blocks-structural-animation-time infinite;
+}
+
+.blocks-structural__side-panel {
+  top: 32.5%;
+  left: 65%;
+  height: 58.3%;
+  width: 35%;
+  background-color: rgba(0, 255, 255, .5);
+  animation: kf-blocks-structural-side-panel $blocks-structural-animation-time infinite;
+}
+
+.blocks-structural__footer {
+  top: 90.8%;
+  left: 0;
+  height: 9.2%;
+  width: 100%;
+  background-color: rgba(0, 0, 255, .5);
+  animation: kf-blocks-structural-footer $blocks-structural-animation-time infinite;
+}
+
+.blocks-structural__navigation .blocks-structural__text {
+  // fudge centering for font in use
+  @include media-query($on-phone) {
+    vertical-align: top;
+    margin-top: 1px;
   }
 }
