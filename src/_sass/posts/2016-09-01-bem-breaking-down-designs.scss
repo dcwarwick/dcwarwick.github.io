@@ -6,22 +6,8 @@
 
 $bubbleTextBackgroud: #fff;
 
-.blocks-structural__container {
-  position: relative;
-
-  &:active, &:hover {
-    * {
-      animation: 0;
-      opacity: 1;
-    }
-  }
-}
-
-.blocks-structural__navigation,
-.blocks-structural__notification,
-.blocks-structural__main,
-.blocks-structural__side-panel,
-.blocks-structural__footer {
+// ------------------ mixins ------------------ ------------------ ------------------
+@mixin image-panel-overlays {
   position: absolute;
   opacity: 0;
   line-height: 1; // keep text in overlays centered
@@ -31,9 +17,11 @@ $bubbleTextBackgroud: #fff;
     opacity: 1;
   }
 
-  .blocks-structural__text {
+  .bubble-text {
+    white-space: nowrap;
     padding: 0 5px;
     border-radius: 5px;
+    border: 1px solid $grey-color;
     background-color: $bubbleTextBackgroud;
     font-size: $base-font-size;
     // vertical-align: middle;
@@ -48,88 +36,312 @@ $bubbleTextBackgroud: #fff;
   }
 }
 
-$blocks-structural-animation-stops: 0 16.7 33.4 50 66.7 83.4 100;
+@mixin animation-container {
+  position: relative;
+
+  &:active, &:hover {
+    * {
+      animation: 0;
+      opacity: 1;
+    }
+  }
+}
+
+@mixin process-animation-map($map, $name) {
+  $stops: map-get($map, 'animation-stops');
+  $time: #{$stops * 1.5s};
+  $elements: map-get($map, 'animation-elements');
+  @each $element, $settings in $elements {
+    $elementStops: map-get($settings, 'stops');
+    $elementStyles: map-get($settings, 'styles');
+
+    @keyframes kf-#{$name}__#{$element} {
+      $start: #{100 * (nth($elementStops, 1) - 1) / ($stops - 1)};
+      $mid: #{100 * (nth($elementStops, 2) - 1) / ($stops - 1)};
+      $end: #{100 * (nth($elementStops, 3) - 1) / ($stops - 1)};
+
+      @if ($start != "0") {
+        0% { opacity: 0; }
+        #{$start}% { opacity: 0.1; }
+      } @else {
+        #{$start}% { opacity: 0; }
+      }
+      #{$mid}% { opacity: 1; }
+
+      @if ($end != "100") {
+        100% { opacity: 0; }
+        #{$end}% { opacity: 0; }
+      } @else {
+        #{$end}% { opacity: 0; }
+      }
+    }
+
+    .#{$name}__#{$element} {
+      @each $style, $value in $elementStyles {
+        #{$style}: $value;
+      }
+      animation: kf-#{$name}__#{$element} $time linear infinite;
+    }
+  }
+}
+
+.blocks-structural__container {
+  @include animation-container;
+}
+
+.blocks-structural__navigation,
+.blocks-structural__notification,
+.blocks-structural__main,
+.blocks-structural__side-panel,
+.blocks-structural__footer {
+  @include image-panel-overlays;
+}
+
 $blocks-structural-animation-map: (
-  navigation: 1 2 3,
-  notification: 2 3 4,
-  main: 3 4 5,
-  side-panel: 4 5 6,
-  footer: 5 6 7
+  animation-stops: 7,
+  animation-elements: (
+    navigation: (
+      stops: 1 2 3,
+      styles: (
+        top: 0,
+        left: 0,
+        height: 5%,
+        width: 100%,
+        background-color: rgba(255, 0, 0, .5)
+      )
+    ),
+    notification: (
+      stops: 2 3 4,
+      styles: (
+        top: 5%,
+        left: 0,
+        height: 27.5%,
+        width: 100%,
+        background-color: rgba(255, 255, 0, .5)
+      )
+    ),
+    main: (
+      stops: 3 4 5,
+      styles: (
+        top: 32.5%,
+        left: 0,
+        height: 58.3%,
+        width: 65%,
+        background-color: rgba(0, 255, 0, .5)
+      )
+    ),
+    side-panel: (
+      stops: 4 5 6,
+      styles: (
+        top: 32.5%,
+        left: 65%,
+        height: 58.3%,
+        width: 35%,
+        background-color: rgba(0, 255, 255, .5)
+      )
+    ),
+    footer: (
+      stops: 5 6 7,
+      styles: (
+        top: 90.8%,
+        left: 0,
+        height: 9.2%,
+        width: 100%,
+        background-color: rgba(0, 0, 255, .5)
+      )
+    )
+  )
 );
 
-@each $item, $steps in $blocks-structural-animation-map {
-  @keyframes kf-blocks-structural-#{$item} {
-    $start: nth($blocks-structural-animation-stops, nth($steps, 1));
-    $mid: nth($blocks-structural-animation-stops, nth($steps, 2));
-    $end: nth($blocks-structural-animation-stops, nth($steps, 3));
-    @if $start != 0 {
-      0% { opacity: 0; }
-      #{$start}% { opacity: 0; }
-    } @else {
-      #{$start}% { opacity: 0; }
-    }
-    #{$mid}% { opacity: 1; }
+@include process-animation-map($blocks-structural-animation-map, 'blocks-structural');
 
-    @if $end != 100 {
-      #{$end}% { opacity: 0; }
-      100% { opacity: 0; }
-    } @else {
-      #{$end}% { opacity: 0; }
-    }
+// ------ elements structural
+.elements-structural__container {
+  @include animation-container;
+}
+
+.elements-structural__main,
+.elements-structural__left-panel,
+.elements-structural__right-panel,
+.elements-structural__bottom-panel {
+  @include image-panel-overlays;
+}
+
+$elements-structural-animation-map: (
+  animation-stops: 6,
+  animation-elements: (
+    main: (
+      stops: 1 2 3,
+      styles: (
+        top: 0,
+        left: 15%,
+        height: 100%,
+        width: 70%,
+        background-color: rgba(255, 0, 0, .5)
+      )
+    ),
+    left-panel: (
+      stops: 2 3 4,
+      styles: (
+        top: 0,
+        left: 0,
+        height: 100%,
+        width: 15%,
+        background-color: rgba(255, 255, 0, .5)
+      )
+    ),
+    right-panel: (
+      stops: 3 4 5,
+      styles: (
+        top: 0,
+        left: 85%,
+        height: 100%,
+        width: 15%,
+        background-color: rgba(0, 255, 0, .5)
+      )
+    ),
+    bottom-panel: (
+      stops: 4 5 6,
+      styles: (
+        top: 70%,
+        left: 15%,
+        height: 30%,
+        width: 70%,
+        background-color: rgba(255, 255, 255, .5)
+      )
+    )
+  )
+);
+
+@include process-animation-map($elements-structural-animation-map, 'elements-structural');
+
+// ------ elements components
+.elements-components__container {
+  @include animation-container;
+}
+
+.elements-components__left-nav,
+.elements-components__right-nav,
+.elements-components__title,
+.elements-components__description,
+.elements-components__quick-nav {
+  @include image-panel-overlays;
+}
+
+$elements-components-animation-map: (
+  animation-stops: 7,
+  animation-elements: (
+    left-nav: (
+      stops: 1 2 3,
+      styles: (
+        top: 46%,
+        left: 6%,
+        height: 10%,
+        width: 5%,
+        background-color: rgba(255, 0, 0, .5)
+      )
+    ),
+    right-nav: (
+      stops: 2 3 4,
+      styles: (
+        top: 46%,
+        left: 89%,
+        height: 10%,
+        width: 5%,
+        background-color: rgba(255, 255, 0, .5)
+      )
+    ),
+    title: (
+      stops: 3 4 5,
+      styles: (
+        top: 74%,
+        left: 42%,
+        height: 8%,
+        width: 16%,
+        background-color: rgba(0, 255, 0, .5)
+      )
+    ),
+    description: (
+      stops: 4 5 6,
+      styles: (
+        top: 82%,
+        left: 25%,
+        height: 6%,
+        width: 50%,
+        background-color: rgba(0, 255, 255, .5)
+      )
+    ),
+    quick-nav: (
+      stops: 5 6 7,
+      styles: (
+        top: 89.25%,
+        left: 46.5%,
+        height: 4%,
+        width: 2%,
+        background-color: rgba(0, 0, 255, .5)
+      )
+    )
+  )
+);
+
+@include process-animation-map($elements-components-animation-map, 'elements-components');
+
+// ------ modifiers
+.modifiers__container {
+  @include animation-container;
+
+  &::after {
+    content: '';
+    background: url('/assets/posts/2016-09-01-bem-breaking-down-designs/bootstrap-carousel.png');
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
   }
 }
 
-$blocks-structural-animation-time: 10s;
-
-.blocks-structural__navigation {
-  top: 0;
-  left: 0;
-  height: 5%;
-  width: 100%;
-  background-color: rgba(255, 0, 0, .5);
-  animation: kf-blocks-structural-navigation $blocks-structural-animation-time infinite;
+.modifiers__left-nav,
+.modifiers__right-nav,
+.modifiers__quick-nav {
+  @include image-panel-overlays;
 }
 
-.blocks-structural__notification {
-  top: 5%;
-  left: 0;
-  height: 27.5%;
-  width: 100%;
-  background-color: rgba(255, 255, 0, .5);
-  animation: kf-blocks-structural-notification $blocks-structural-animation-time infinite;
-}
+$modifiers-animation-map: (
+  animation-stops: 5,
+  animation-elements: (
+    left-nav: (
+      stops: 1 2 3,
+      styles: (
+        top: 47%,
+        left: 5%,
+        height: 10%,
+        width: 5%,
+        background-color: rgba(255, 0, 0, .5)
+      )
+    ),
+    right-nav: (
+      stops: 2 3 4,
+      styles: (
+        top: 47%,
+        left: 88.5%,
+        height: 10%,
+        width: 10%,
+        background-color: rgba(255, 255, 0, .5)
+      )
+    ),
+    quick-nav: (
+      stops: 3 4 5,
+      styles: (
+        top: 89.25%,
+        left: 46.25%,
+        height: 8%,
+        width: 2.25%,
+        background-color: rgba(0, 0, 255, .5)
+      )
+    )
+  )
+);
 
-.blocks-structural__main {
-  top: 32.5%;
-  left: 0;
-  height: 58.3%;
-  width: 65%;
-  background-color: rgba(0, 255, 0, .5);
-  animation: kf-blocks-structural-main $blocks-structural-animation-time infinite;
-}
-
-.blocks-structural__side-panel {
-  top: 32.5%;
-  left: 65%;
-  height: 58.3%;
-  width: 35%;
-  background-color: rgba(0, 255, 255, .5);
-  animation: kf-blocks-structural-side-panel $blocks-structural-animation-time infinite;
-}
-
-.blocks-structural__footer {
-  top: 90.8%;
-  left: 0;
-  height: 9.2%;
-  width: 100%;
-  background-color: rgba(0, 0, 255, .5);
-  animation: kf-blocks-structural-footer $blocks-structural-animation-time infinite;
-}
-
-.blocks-structural__navigation .blocks-structural__text {
-  // fudge centering for font in use
-  @include media-query($on-phone) {
-    vertical-align: top;
-    margin-top: 1px;
-  }
-}
+@include process-animation-map($modifiers-animation-map, 'modifiers');
