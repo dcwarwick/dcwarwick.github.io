@@ -53,7 +53,7 @@ Breaking up a page into structural block elements should not be a difficult task
 At this point you can either marvel at the animation skills below to discover the block classes I assigned to the parts of the page below, the landing page on Github, or tap to reveal all including the amazing color scheme.
 
 <div class="blocks-structural__container" tabindex="0">
-{% include image-tag.html name="github-page.png" alt="extract from personal github landing page" classes="blocks-structural__screenshot" %}
+{% include icon-twitter.html name="github-page.png" alt="extract from personal github landing page" classes="blocks-structural__screenshot" %}
   <div class="blocks-structural__navigation"><span class="bubble-text centered">header</span></div>
   <div class="blocks-structural__notification"><span class="bubble-text centered">notification-panel</span></div>
   <div class="blocks-structural__main"><span class="bubble-text centered">main-content</span></div>
@@ -84,7 +84,7 @@ Everything contained in a block that you need to reference from CSS needs an ele
 Time for some more exciting animation, first show structural sections of a component. The bootstrap carousel from w3schools in this case.
 
 <div class="elements-structural__container" tabindex="0">
-{% include image-tag.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements-structural__screenshot" %}
+{% include icon-twitter.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements-structural__screenshot" %}
   <div class="elements-structural__main">
     <span class="bubble-text centered">carousel__main</span>
   </div>
@@ -109,7 +109,7 @@ Just to re-emphasise, all of the elements are prefixed by the block name. For th
 Next up, element names for components in the block..
 
 <div class="elements-components__container" tabindex="0">
-{% include image-tag.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements-components__screenshot" %}
+{% include icon-twitter.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements-components__screenshot" %}
   <div class="elements-components__left-nav">
     <span class="above">
       <div class="bubble-text">carousel__left-nav</div>
@@ -152,7 +152,7 @@ It is interesting to note that this is the first and only time I have included t
 ## Modifiers - State / Alternate Versions
 
 <div class="modifiers__container" tabindex="0">
-{% include image-tag.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements__screenshot" %}
+{% include icon-twitter.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements__screenshot" %}
   <div class="modifiers__left-nav">
     <span class="above">
       <div class="bubble-text">carousel__left-nav--first</div>
