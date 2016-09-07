@@ -12,13 +12,13 @@ Recently tacked onto the end of CSS pre-processor workshop I was running, I thre
 It will help you break down the designs you are tasked with producing into the rectangular segments your web page is going to be built from.
 
 ## What is BEM?
-In brief, as you can google as well as I can, BEM is a CSS selector class naming convention. It suggests naming your classes by blocks, elements and modifiers hence BEM. When used correctly you will find that BEM helps:
+In brief, as you can trawl the internet as well as I can, BEM is a CSS selector class naming convention. It suggests naming your classes by blocks, elements and modifiers hence BEM. When used correctly you will find that BEM helps:
 
 ## Why use BEM?
 - Reduce CSS specificity.
 - Reduce SCSS depth (I'll come back to SCSS in another post).
 - Improves reusability/transferability of your CSS.
-- Stipulates that you should not use tag names and IDs for CSS selectors (crikey my drafts folder is filling up).
+- Encourages you not use tag names and IDs for CSS selectors (crikey my drafts folder is filling up).
 
 ## What does it look like?
 
@@ -34,23 +34,23 @@ block__element--modifier
 ```
 
 Note:
-- elements are optional, bur frequently used.
-- modifiers are optional, but less frequently used.
-- blocks, elements and modifiers can be hyphenated to allow verbose names which I would recommend.
-
+- Elements are optional, bur frequently used.
+- Modifiers are optional, but less frequently used.
+- Blocks, elements and modifiers can be hyphenated to allow verbose names which I would recommend.
+- The class names consist only of lowercase letters, underscores and hyphens.
 
 ### BEMIT
 Harry now prefers BEMIT which extends the BEM syntax with suffixes for media queries and a Hungarian notation like prefix. Personally, I find it makes the class names less readable, so while I do add a 'js-' to the start of any javascript selectors, I otherwise stick to BEM.
 
-The reason for using the 'js-' prefix is that it provides a seperation between classes used to style the element and classes used to interact with an element via code. This means it is clear to anyone making future changes what the impact is of changing or re-using the classes.
+The reason for using the 'js-' prefix is that it provides a seperation between classes used to style the element and classes used to interact with an element via code. This means it is clear to anyone making future changes what the impact is of changing or re-using a class.
 
 ## In practice
 
 ### Blocks - Structural sections of a page
 
-Breaking up a page into structural block elements should not be a difficult task, simply draw rectangles around the main blocks on a page. Break out some wax crayons; this will really impress your designer, or magical web based collaboration tool of your choice and get boxy assigning names to blocks as you go.
+Breaking up a page into structural blocks should not be a difficult task, simply draw rectangles around the main blocks on a page. Break out some wax crayons; this will really impress your designer, or magical web based collaboration tool of your choice and get boxy assigning names to blocks as you go.
 
-At this point you can either marvel at the animation skills below to discover the block classes I assigned to the parts of the page below, the landing page on Github, or tap to reveal all including the amazing color scheme.
+At this point you can marvel at my animation skills below to discover the block classes assigned to the parts of the page below, the landing page on Github. Hover or tap to reveal all including the amazing color scheme in it's full glory.
 
 <div class="blocks-structural__container" tabindex="0">
 {% include image-tag.html name="github-page.png" alt="extract from personal github landing page" classes="blocks-structural__screenshot" %}
@@ -61,7 +61,7 @@ At this point you can either marvel at the animation skills below to discover th
   <div class="blocks-structural__footer"><span class="bubble-text centered">footer</span></div>
 </div>
 
-They are...
+They blocks identified are...
 
 - header
 - notification-panel
@@ -79,7 +79,7 @@ In the simpler cases your just going to end up with component names like; cool-c
 
 ### Elements - Structural and component
 
-Everything contained in a block that you need to reference from CSS needs an element name. This will range from structural parts of your component to isntances of other components.
+Inside your structural or component blocks assign element names to your HTML tags. This will range from structural parts of your component to instances of other components. Obviously you could choose to name structural parts of a component with a hyphenated block name, but I'd only do that with large components that require extra breaking down.
 
 Time for some more exciting animation, first show structural sections of a component. The bootstrap carousel from w3schools in this case.
 
@@ -99,14 +99,15 @@ Time for some more exciting animation, first show structural sections of a compo
   </div>
 </div>
 
-Just to re-emphasise, all of the elements are prefixed by the block name. For the structural block__element we have:
+Just to re-emphasise, all of the elements are prefixed by the block name.
 
+The structural block__element list above is:
 - carousel__main
 - carousel__left-panel
 - carousel__right-panel
 - carousel__bottom-panel
 
-Next up, element names for components in the block..
+Next up, element names for components in the block. This time we identify all remaining elements that need styling.
 
 <div class="elements-components__container" tabindex="0">
 {% include image-tag.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements-components__screenshot" %}
@@ -147,9 +148,11 @@ The list this time reads:
 - carousel__quick-nav
 - js-carousel__quick-nav
 
-It is interesting to note that this is the first and only time I have included the js- prefix. This is because it is at the element level you are likely to have most of your user interface logic plumbed into. You may however have javascript plumbed in elsewhere, perhaps to populate a carousel for instance. I would recommend you always follow the pattern shown here of duplicating the CSS selector class, and giving it a js- prefix for the seperation of concerns previously outlined.
+It is interesting to note that this is the first and only time I have included the js- prefix. This is because it is at the element level you are likely to have most of your user interface logic plumbed into. You may have javascript plumbed in elsewhere, perhaps to populate a carousel for instance. I would recommend you always follow the pattern shown here of duplicating the CSS selector class, and giving it a js- prefix for the separation of concerns previously outlined.
 
 ## Modifiers - State / Alternate Versions
+
+Modifiers can be used to either define alternative versionsstate in cases where you use code to set a state value.
 
 <div class="modifiers__container" tabindex="0">
 {% include image-tag.html name="bootstrap-carousel.jpg" alt="Bootstrap carousel from w3schools" classes="elements__screenshot" %}
@@ -170,8 +173,50 @@ It is interesting to note that this is the first and only time I have included t
   </div>
 </div>
 
-Modifiers can be used to either define alternative versions; carousel__right-nav--big-arrow and carousel__quick-nav--stickman in the above example. They can also be used to define state in cases where you use code to set a state value; carousel__left-nav--first, carousel__right-nav-last, carousel__quick-nav--selected in the above example.
+The modifiers chosen above are:
+- carousel__left-nav--first
+- carousel__right-nav--last
+- carousel__right-nav--big-arrow
+- carousel__quick-nav--selected
+- carousel__quick-nav--stickman
 
+Here we have alternative versions for the left, right and quick nav buttons. The quick nav also has it's state carousel__quick-nav--selected identified so we can style it.
+
+## Verbose HTML v Verbose CSS
+I often find myself assigning both block__element and block__element--modifier to an HTML element. This allows me to keep the core behvior assigned to the block__element selector and the alternative to block__element--modifier. Keeping my CSS tiday comes at the price of making my HTML more verbose.
+
+E.g.
+
+```css
+.carousel__quick-nav {
+  // core css
+}
+
+.carousel__quick-nav--stickman {
+  // stickman css
+}
+```
+
+However this is just personal preference, you may prefer the following which makes your HTML less verbose.
+
+```css
+.carousel__quick-nav,
+.carousel__quick-nav--stickman {
+  // core css
+}
+
+.carousel__quick-nav--stickman {
+  // stickman css
+}
+```
+
+## A challenge
+
+Go practice, pick on your favourite web-based email client and break it down using BEM. I guarantee when you come back a couple of days later you will find stuff you missed the first time.
+
+## Final words
+
+If you have questions, suggestions for posts or the desire to crowd fund me a beer you can get in touch on github, twitter, pigeon, cups and string etc.
 
 ## .scss-lint.yml configurations
 Yes, you should be linting your scss.
