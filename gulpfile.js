@@ -26,7 +26,7 @@ const postcss = require('gulp-postcss');
 
 // Folder Paths
 const dist = './_site/';
-const src = './src/';
+const src = './';
 
 // trace options
 const trace = true;  // set true to trace build pipelines
@@ -71,7 +71,9 @@ gulp.task('styles', function() {
 
 // Jekyll
 gulp.task('jekyll-build', function(gulpCallBack) {
-  var jekyll = cp.spawn('jekyll', ['build'], {stdio: 'inherit'});
+  var jekyll = cp.spawn('bundle', ['exec', 'jekyll', 'build'], {
+    stdio: 'inherit'
+  });
 
   jekyll.on('exit', function(code) {
     gulpCallBack(code === 0 ? null : 'ERROR: Jekyll process exited with code: ' + code);
