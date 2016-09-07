@@ -172,6 +172,7 @@ It is interesting to note that this is the first and only time I have included t
 
 Modifiers can be used to either define alternative versions; carousel__right-nav--big-arrow and carousel__quick-nav--stickman in the above example. They can also be used to define state in cases where you use code to set a state value; carousel__left-nav--first, carousel__right-nav-last, carousel__quick-nav--selected in the above example.
 
+
 ## .scss-lint.yml configurations
 Yes, you should be linting your scss.
 
