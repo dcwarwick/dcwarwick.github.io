@@ -1,0 +1,43 @@
+@import 'settings';
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rotated {
+  transform-origin: 0 50%;
+  transform: rotate(90deg);
+
+  &.centered {
+    transform: rotate(90deg) translate(-50%, 0%)
+  }
+}
+
+.above {
+  position: absolute;
+  transform: translatey(-100%);
+
+  &.centered {
+    top: 0;
+    transform: translate(-50%, -100%);
+  }
+
+  &.leftof {
+    left: 0;
+    top: 0;
+    transform: translate(-100%, -100%);
+  }
+}
+
+.leftof {
+  position: absolute;
+  transform: translateX(-100%);
+
+  &.centered {
+    left: 0;
+    transform: translate(-100%, -50%);
+  }
+}
