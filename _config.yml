@@ -19,7 +19,6 @@ github_username:  lee-chase
 
 
 # Jekyll settings
-source:       ./src
 destination:  ./_site
 plugins_dir:  _plugins
 layouts_dir:  _layouts
