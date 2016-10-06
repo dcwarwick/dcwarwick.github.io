@@ -1,0 +1,42 @@
+@charset 'utf-8';
+
+@import '../utils';
+@import '../settings';
+@import '../mixins';
+
+$dark-red: #600;
+$dark-green: #040;
+
+.restrained-rant__ref {
+  color: $dark-red;
+}
+
+.restrained-rant__text {
+  color: $dark-green;
+}
+
+.green-red-animate {
+  animation: kf-green-red-animate 2s infinite;
+}
+
+@keyframes kf-green-red-animate {
+  0%   { color: #f00; }
+  50% { color: #0f0; }
+  100%   { color: #f00; }
+}
+
+.repeat {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.sample-button {
+  background-color: #006;
+  height: 64px;
+  width: 64px;
+}
+
+.sample-button svg {
+  height: 100%;
+  width: 100%;
+}
