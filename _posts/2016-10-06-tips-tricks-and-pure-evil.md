@@ -83,6 +83,11 @@ or
 </div>
 ```
 
+Here is an example of '&lt;!-- --&gt;' in action
 
-## 5. CSS - Vertical align center
+- http://codepen.io/lee-chase/pen/QKQKJV
+
+## 5. If in doubt box-size: border-box
+
+## 6. CSS - Vertical align center
 Coming soon...
