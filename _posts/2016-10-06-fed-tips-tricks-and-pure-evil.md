@@ -192,3 +192,72 @@ While these are handy, and can provide a useful fall back for those having to su
 The following example of all three techniques shows that flexbox is the only way to position vertically without adding css to the item being centered.
 
 - [Live example on codepen](http://codepen.io/lee-chase/pen/qaojKy)
+
+## CSS Selector - Hammer time
+Reading about CSS selector specificity is fun https://www.w3.org/TR/2011/REC-CSS2-20110607/cascade.html#specificity
+
+OK. No it's not so let's simplify somewhat.
+- Do not select by ID
+- Do not select by tag name
+- Be as non specific as possible.
+- Put your css in your css files, not inline
+- Do not apply !important Hammer of Thor unless absolutely necessary or the Chitauri are invading.
+
+Taking them one at a time
+### Do not select by ID
+This is no doubt what your css linter will be telling you (please use one, in fact use SCSS, LESS or similar). The main reason is that IDs are fragile, especially in a data driven dom. They also hit harder than class selectors meaning anyone overriding an ID selector will have to also use the ID selector.
+
+In addition to the above CSS selectors for IDs are extremely unlikely to be re-usable in another project.
+
+### Do not select by tag name
+Selecting by tag is like giving a child free reign in a sweet shop, you are going to end up with far more than you bargained for. The only case for selecting by tag ever is for utility css such as that found in normalize.css and reset.css which attempt level the starting position accross browsers.
+
+### Be as non-specific as possible
+Given the following HTML
+
+```html
+<div class="i-am-outer i-sit-here say-hi-to-mum">
+  <div class="another">
+    <div class="hello-world">
+      Hello World
+    </div>
+  </div>
+</div>
+```
+
+Now you could reference it in css as
+
+```css
+div.i-am-outer.i-sit-here.say-hi-to-mum div.another div.hello-world {
+
+}
+```
+or
+```css
+.hello-world {
+
+}
+```
+The problem with the former is that if anyone needs to override your css they either have to come later in the css file and use the same level of specificity, or be even more specific. Apart from the extra typing incurred the increased specificity means you will not match a second, third or nth instnace of the class hello-world unless it matches this selector.
+
+Personally I prefer BEM CSS selectors as they load the individual class names with all the specificity needed. Seem [BEM breaking down designs](/2016/09/01/bem-breaking-down-designs.html)
+
+### Put your css in your css files, not inline
+Not simply a case of separating your concerns, this is because the only way inline css is going to get overridden is with the !important nuclear option.
+
+### Do not use !important
+!important is the ultimate weapon of mass specificity, but like all ultimate weapons it just leads to an arms race. Now don't get me wrong I have on occasion beaten a third party component into submission with a !important, but I was only able to do so because the author of the component had not used !important themselves.
+
+There are a small number of cases where !important might make a sense, but I'd still try and avoid where possible. However if you're having to use !important even here, then maybe you have gone wrong somewhere and should consider refactoring.
+
+```css
+.float-it-right {
+  float: right !important;
+}
+```
+
+## 8
+
+## 9
+
+## 10 - seems like a nice round number just need to get this far
