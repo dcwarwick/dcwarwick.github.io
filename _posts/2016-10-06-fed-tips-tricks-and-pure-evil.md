@@ -191,4 +191,4 @@ While these are handy, and can provide a useful fall back for those having to su
 
 The following example of all three techniques shows that flexbox is the only way to position vertically without adding css to the item being centered.
 
-- [Live example on codepen](http://codepen.io/lee-chase/pen/LRQRZp)
+- [Live example on codepen](http://codepen.io/lee-chase/pen/qaojKy)
