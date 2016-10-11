@@ -232,12 +232,15 @@ div.i-am-outer.i-sit-here.say-hi-to-mum div.another div.hello-world {
 
 }
 ```
+
 or
+
 ```css
 .hello-world {
 
 }
 ```
+
 The problem with the former is that if anyone needs to override your css they either have to come later in the css file and use the same level of specificity, or be even more specific. Apart from the extra typing incurred the increased specificity means you will not match a second, third or nth instnace of the class hello-world unless it matches this selector.
 
 Personally I prefer BEM CSS selectors as they load the individual class names with all the specificity needed. Seem [BEM breaking down designs](/2016/09/01/bem-breaking-down-designs.html)
