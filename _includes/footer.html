@@ -1,4 +1,4 @@
-<footer class="site-footer">
+<footer class="site-footer" role="contentinfo">
 
   <div class="wrapper">
 
@@ -7,7 +7,6 @@
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li>{{ site.title }}</li>
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
         </ul>
       </div>
@@ -25,6 +24,10 @@
             {% include icon-twitter.html username=site.twitter_username %}
           </li>
           {% endif %}
+
+          <li class="rss-subscribe">
+            subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>
+          </li>
         </ul>
       </div>
 

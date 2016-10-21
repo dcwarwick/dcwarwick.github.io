@@ -1,20 +1,20 @@
 {
-  "name": "cloudchase",
+  "name": "dcwarwick",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudchase/cloudchase.git"
+    "url": "git+https://github.com/dcwarwick/dcwarwick.github.io.git"
   },
-  "author": "Lee Chase",
+  "author": "Dave Clark",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cloudchase/cloudchase/issues"
+    "url": "https://github.com/dcwarwick/dcwarwick.github.io/issues"
   },
-  "homepage": "https://github.com/cloudchase/cloudchase",
+  "homepage": "https://github.com/dcwarwick/dcwarwick.github.io",
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "browser-sync": "^2.14.3",
@@ -23,7 +23,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.1.1",
     "gulp-sass": "^2.3.2",
-    "gulp-sass-lint": "^1.2.0",
+    "gulp-scss-lint": "^0.4.0",
     "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-spy": "^1.1.0",
     "path": "^0.12.7",

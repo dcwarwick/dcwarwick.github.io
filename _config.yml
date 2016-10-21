@@ -6,16 +6,14 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Cloud Chase
-email: leechase@live.com
+title: Dave Clark
+email: dave.clark@uk.ibm.com
 description: >
-  In the fast moving world of front-end development,
-  there is always another cloud out there for you to chase. Here you
-  will find posts about the fluffy animals I've tried to catch along the way; ECMAScript, SCSS, Git, HTML...
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://pages.github.ibm.com/" # the base hostname & protocol for your site
-twitter_username: dr2bricks
-github_username:  lee-chase
+  &hellip;
+baseurl: ""  # the subpath of your site, e.g. /blog
+url: "http://pages.github.ibm.com/"  # the base hostname & protocol for your site
+twitter_username:
+github_username: dcwarwick
 
 
 # Jekyll settings
@@ -59,7 +57,7 @@ incremental: false
 detach:  false
 port:    4000
 host:    127.0.0.1
-baseurl: "" # does not include hostname
+baseurl: ""  # does not include hostname
 show_dir_listing: false
 
 # Outputting

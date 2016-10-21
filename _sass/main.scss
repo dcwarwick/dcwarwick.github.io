@@ -9,11 +9,21 @@
 @import 'utils';
 
 .site-header {
-  background-image: url('/assets/cloud-top.jpg');
-  background-size: contain;
+  background-color: #7cc7ff;
 }
 
-.site-header__hero-image {
+.site-title__image {
+  margin: 2px 0 0 .5em;
+  vertical-align: top;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.site-header__hero {
   width: 100%;
-  height: auto;
+  padding: 0 0 10px 0;
+  text-align: center;
+  font-size: 32px;
+  color: #1D3649;
 }
